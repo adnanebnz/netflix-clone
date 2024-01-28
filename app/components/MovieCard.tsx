@@ -1,10 +1,11 @@
 "use client";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Heart, PlayCircle } from "lucide-react";
 import PlayVideoModal from "./PlayVideoModal";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { addTowatchlist, deleteFromWatchlist } from "../action";
 
 interface iAppProps {
   title: string;
@@ -39,7 +40,7 @@ export function MovieCard({
 
       <div className="right-5 top-5 absolute z-10">
         {watchList ? (
-          <form>
+          <form action={deleteFromWatchlist}>
             <input type="hidden" name="watchlistId" value={wachtListId} />
             <input type="hidden" name="pathname" value={pathName} />
             <Button variant="outline" size="icon">
@@ -47,7 +48,7 @@ export function MovieCard({
             </Button>
           </form>
         ) : (
-          <form>
+          <form action={addTowatchlist}>
             <input type="hidden" name="movieId" value={movieId} />
             <input type="hidden" name="pathname" value={pathName} />
             <Button variant="outline" size="icon">
