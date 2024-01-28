@@ -1,8 +1,10 @@
 import { MovieCard } from "@/app/components/MovieCard";
 import { authOptions } from "@/app/utils/auth";
 import prisma from "@/app/utils/db";
+import CardSkeleton from "@/components/cardSkeleton";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+import { Suspense } from "react";
 
 async function getData(userId: string) {
   const data = await prisma.watchList.findMany({
@@ -33,7 +35,7 @@ export default async function Watchlist() {
   const session = await getServerSession(authOptions);
   const data = await getData(session?.user?.email as string);
   return (
-    <>
+    <Suspense fallback={<CardSkeleton />}>
       <h1 className="text-white text-4xl font-bold underline mt-10 px-5 sm:px-0">
         Your watchlist
       </h1>
@@ -45,6 +47,7 @@ export default async function Watchlist() {
               alt="Movie"
               width={500}
               height={400}
+              priority
               className="rounded-sm absolute w-full h-full object-cover"
             />
             <div className="h-60 relative z-10 w-full transform transition duration-500 hover:scale-125 opacity-0 hover:opacity-100">
@@ -54,6 +57,7 @@ export default async function Watchlist() {
                   alt="Movie"
                   width={800}
                   height={800}
+                  priority
                   className="absolute w-full h-full -z-10 rounded-lg object-cover"
                 />
 
@@ -78,6 +82,6 @@ export default async function Watchlist() {
           </div>
         ))}
       </div>
-    </>
+    </Suspense>
   );
 }

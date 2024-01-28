@@ -1,8 +1,8 @@
+import { getServerSession } from "next-auth";
 import Image from "next/image";
+import { authOptions } from "../utils/auth";
 import prisma from "../utils/db";
 import { MovieCard } from "./MovieCard";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../utils/auth";
 
 async function getData(userId: string) {
   const data = await prisma.movie.findMany({
@@ -43,6 +43,7 @@ export default async function RecentlyAdded() {
             alt="Movie"
             width={500}
             height={400}
+            priority
             className="rounded-sm absolute w-full h-full object-cover"
           />
 
@@ -53,6 +54,7 @@ export default async function RecentlyAdded() {
                 alt="Movie"
                 width={800}
                 height={800}
+                priority
                 className="absolute w-full h-full -z-10 rounded-lg object-cover"
               />
 

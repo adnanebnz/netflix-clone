@@ -18,10 +18,11 @@ export default function UserNav({ session }: { session: any }) {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-10 w-10 rounded-sm">
           <Avatar className="h-10 w-10 rounded-sm">
-            <AvatarImage src="https://i.pinimg.com/564x/1b/a2/e6/1ba2e6d1d4874546c70c91f1024e17fb.jpg" />
-            <AvatarFallback className="rounded-sm">
-              {session?.user.name}
-            </AvatarFallback>
+            <AvatarImage
+              alt="avatar"
+              src="https://i.pinimg.com/564x/1b/a2/e6/1ba2e6d1d4874546c70c91f1024e17fb.jpg"
+            />
+            <AvatarFallback className="rounded-sm">Profile</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
